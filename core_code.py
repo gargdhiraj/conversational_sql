@@ -6,6 +6,10 @@ import db
 import streamlit as st
 from decouple import config
 
+db_pass = st.text_input("DB Password", key="db_pass",type="password")
+db.db_password = db_pass  # Set the password for the db module
+api_key = st.text_input("API KEY", key="api_key")
+
 st.write("# Text to SQL Query Generator ")
 
 user_query = st.text_input("Enter your query", key="query_input")
@@ -253,7 +257,7 @@ RELATIONSHIPS SUMMARY (FOREIGN‑KEY MAP)
 llm = ChatOpenAI(
     model="gpt-3.5-turbo",
     temperature=0,
-    openai_api_key=config("openai_api_key")
+    openai_api_key=api_key
 )
 # 3. Create prompt template
 prompt = ChatPromptTemplate.from_messages([
